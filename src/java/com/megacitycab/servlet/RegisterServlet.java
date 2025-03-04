@@ -22,7 +22,7 @@ public class RegisterServlet extends HttpServlet {
         String hashedPassword = PasswordUtil.hashPassword(password);
 
         // Create a new User object
-        User user = new User(name, email, contact, hashedPassword, "customer");
+        User user = new User(rs.getInt("user_id"), name, email, contact);
 
         // Register the user
         if (UserDAO.registerUser(user)) {

@@ -2,7 +2,6 @@ package com.megacitycab.servlet;
 
 import com.megacitycab.dao.UserDAO;
 import com.megacitycab.model.User;
-import com.megacitycab.util.PasswordUtil;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,12 +23,13 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             // Create session after successful login
             HttpSession session = request.getSession();
-            session.setAttribute("loggedInUser", user); // Save the user object in session
+            session.setAttribute("loggedInUser", user);
             session.setAttribute("role", user.getRole()); // Save the user role in session
+            session.setAttribute("customerEmail", user.getEmail()); // Save customer email in session
 
             // Redirect to respective dashboard
             if ("admin".equals(user.getRole())) {
-                response.sendRedirect("admin/dashboard.jsp");
+                response.sendRedirect("admin-dashboard.jsp");
             } else {
                 response.sendRedirect("customer-dashboard.jsp");
             }

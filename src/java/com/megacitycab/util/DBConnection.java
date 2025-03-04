@@ -1,3 +1,4 @@
+
 package com.megacitycab.util; // Change from db to util
 
 import java.sql.Connection;
@@ -16,6 +17,7 @@ public class DBConnection {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
+            System.out.println("❌ Failed to connect to the database.");
         }
         return conn;
     }

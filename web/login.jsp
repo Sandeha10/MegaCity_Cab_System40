@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="jakarta.servlet.http.HttpSession" %> <!-- Corrected import -->
+<%@ page import="jakarta.servlet.http.HttpSession" %> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,16 +21,16 @@
     </div>
 
     <%
-        // Check if the user is already logged in (session exists)
+        // Check if the user is already logged in
         if (session != null && session.getAttribute("loggedInUser") != null) {
-            String role = (String) session.getAttribute("role"); // Get the role from session (admin or user)
-            if (role != null && role.equals("admin")) {
-                response.sendRedirect("admin/dashboard.jsp"); // Redirect to admin dashboard if already logged in as admin
+            String role = (String) session.getAttribute("role"); 
+            if ("admin".equals(role)) {
+                response.sendRedirect("admin-dashboard.jsp");
             } else {
-                response.sendRedirect("customer-dashboard.jsp"); // Redirect to user dashboard if already logged in as user
+                response.sendRedirect("customer-dashboard.jsp");
             }
         }
     %>
 
 </body>
-</html> 
+</html>

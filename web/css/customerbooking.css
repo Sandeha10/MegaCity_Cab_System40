@@ -1,0 +1,129 @@
+/* ----- Global Styles ----- */
+body {
+    background: url('booking-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    animation: fadeBackground 10s infinite alternate ease-in-out;
+}
+
+/* Background Image Fade Effect */
+@keyframes fadeBackground {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Centered Booking Form */
+.container {
+    max-width: 700px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.2);
+    margin-top: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect for Container */
+.container:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 15px 40px rgba(255, 255, 255, 0.3);
+}
+
+/* ----- Form Heading ----- */
+h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: #ffcc00;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ----- Form Labels ----- */
+.booking-form label {
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    margin-top: 10px;
+    color: #ffcc00;
+}
+
+/* ----- Input Fields & Select Box ----- */
+.booking-form input, .booking-form select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Focus Effect */
+.booking-form input:focus, .booking-form select:focus {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.5);
+}
+
+/* Dropdown Arrow Color */
+.booking-form select {
+    appearance: none;
+    background-image: url('dropdown-arrow.png');
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 15px;
+}
+
+/* ----- Error Messages (Validation) ----- */
+.text-danger {
+    font-size: 12px;
+    color: red;
+    font-weight: bold;
+    display: none;
+    margin-top: 5px;
+}
+
+/* ----- Submit Button ----- */
+.booking-form button {
+    width: 100%;
+    background: linear-gradient(45deg, #ffcc00, #ff9900);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect for Button */
+.booking-form button:hover {
+    background: linear-gradient(45deg, #ff9900, #ffcc00);
+    box-shadow: 0px 5px 15px rgba(255, 204, 0, 0.6);
+    transform: translateY(-3px);
+}
+
+/* ----- Responsive Design (Mobile & Tablet) ----- */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 30px;
+    }
+    
+    h2 {
+        font-size: 24px;
+    }
+    
+    .booking-form input, .booking-form select {
+        font-size: 13px;
+    }
+}

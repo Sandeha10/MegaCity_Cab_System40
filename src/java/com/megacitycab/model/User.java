@@ -1,6 +1,7 @@
 package com.megacitycab.model;
 
 public class User {
+    private int userId;
     private String name;
     private String email;
     private String contact;
@@ -8,7 +9,8 @@ public class User {
     private String role;
 
     // Constructor to initialize all fields
-    public User(String name, String email, String contact, String passwordHash, String role) {
+    public User(int userId, String name, String email, String contact, String passwordHash, String role) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
         this.contact = contact;
@@ -19,7 +21,14 @@ public class User {
     // Default constructor (optional)
     public User() {}
 
+    public User(int aInt, String name, String email, String contact) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     // Getter and Setter methods for each field
+    public int getUserId() { return userId; }
+    public void setUserId(int userId) { this.userId = userId; }
+
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
