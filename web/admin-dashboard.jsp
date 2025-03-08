@@ -59,6 +59,8 @@
                     <li><a href="viewCustomers.jsp">View All Customers</a></li>
                     <li><a href="driverManagement.jsp">Driver Management</a></li>
                     <li><a href="vehicleManagement.jsp"> Vehicle Management</a></li>
+                    <li><a href="viewInquiries.jsp"> View All Inquiries </a></li>
+                    <li><a href="viewReviews.jsp"> View All Reviews </a></li>
                     <button id="createAdminBtn" class="btn btn-gradient w-100 mt-2"> Create Admin</button>
                 </ul>
             </nav>
