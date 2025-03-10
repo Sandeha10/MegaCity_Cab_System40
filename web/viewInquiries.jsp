@@ -25,31 +25,10 @@
     <title>View All Inquiries</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/viewInquiries.css">
+    <link rel="stylesheet" href="css/admin.css.css">
 </head>
 <body>
-    <div class="admin-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="admin-info">
-                <h3><%= adminName %></h3>
-                <p><%= adminEmail %></p>
-                <p>? <%= adminContact %></p>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="viewavailables.jsp"> View Available Bookings</a></li>
-                    <li><a href="viewCustomers.jsp">View All Customers</a></li>
-                    <li><a href="driverManagement.jsp">Driver Management</a></li>
-                    <li><a href="vehicleManagement.jsp"> Vehicle Management</a></li>
-                    <li><a href="viewInquiries.jsp"> View All Inquiries </a></li>
-                    <li><a href="viewReviews.jsp"> View All Reviews </a></li>
-                    <button id="createAdminBtn" class="btn btn-gradient w-100 mt-2"> Create Admin</button>
-                </ul>
-            </nav>
-            <form action="LogoutServlet" method="POST">
-                <button type="submit" class="logout btn btn-danger w-100 mt-3">Logout</button>
-            </form>
-        </aside>
+    
 
         <!-- Main Content -->
         <main class="dashboard-content">
