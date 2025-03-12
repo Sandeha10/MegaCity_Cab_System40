@@ -70,7 +70,8 @@
 <body>
 
     <div class="container">
-        <h2>Login to Your Account</h2>
+        <h1> <b>Mega City Cab Service</b> </h1>
+        <h2 style="text-align:left;">Login </h2>
         <form action="LoginServlet" method="post" onsubmit="return validateForm()">
             <div>
                 <input type="email" id="email" name="email" placeholder="Enter Email" oninput="validateEmail()">
@@ -99,11 +100,11 @@
         }
 
         // Check for login error
-        String error = (String) request.getAttribute("error");
-        if (error != null) {
+        String error = request.getParameter("error");
+        if (error != null && error.equals("Email/Password Mismatch")) {
     %>
             <script>
-                showErrorPopup("<%= error %>");
+                showErrorPopup("Password is incorrect, please try again.");
             </script>
     <%
         }

@@ -29,7 +29,8 @@
 <body>
 
     <div class="container">
-        <h2>Create Your Account</h2>
+        <h1><b>Mega City Cab Service</b></h1>
+        <h2 style="text-align:left;"> Register</h2>
         <%
             String errorMessage = request.getParameter("error");
             if (errorMessage != null && errorMessage.equals("1")) {

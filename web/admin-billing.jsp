@@ -5,12 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Billing</title>
+    <title>Generate Bill </title>
     <link rel="stylesheet" href="css/admin-billing.css">
 </head>
 <body>
     <div class="container">
-        <h2>Admin Billing</h2>
+        <h2><b>Generate Bill</b></h2>
         <div class="button-group">
             <button id="viewBookingsBtn">View Bookings</button>
             <button id="generateBillBtn">Generate Bill</button>

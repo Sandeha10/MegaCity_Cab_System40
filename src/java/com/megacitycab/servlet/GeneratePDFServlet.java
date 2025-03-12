@@ -1,61 +1,73 @@
 package com.megacitycab.servlet;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.sql.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.*;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 @WebServlet("/GeneratePDFServlet")
 public class GeneratePDFServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String customerEmail = request.getParameter("customerEmail");
 
-        response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=booking_summary.pdf");
-        
+        // Database connection details
+        String jdbcURL = "jdbc:mysql://localhost:3306/megacitycab";
+        String dbUser = "root";
+        String dbPassword = "";
+
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/megacitycab", "root", "");
-            PreparedStatement pst = conn.prepareStatement("SELECT * FROM bookings WHERE customer_email = ? ORDER BY booking_id DESC LIMIT 1");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
+
+            // Fetch the latest bill for the customer
+            String sql = "SELECT * FROM bills WHERE customer_email = ? ORDER BY bill_id DESC LIMIT 1";
+            PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, customerEmail);
             ResultSet rs = pst.executeQuery();
 
-            Document document = new Document();
-            OutputStream out = response.getOutputStream();
-            PdfWriter.getInstance(document, out);
-            document.open();
-
-            document.add((Element) new Paragraph("Mega City Cab Service - Booking Summary"));
-            document.add((Element) new Paragraph("------------------------------------------------"));
-            
             if (rs.next()) {
-                document.add((Element) new Paragraph("Name: " + rs.getString("name")));
-                document.add((Element) new Paragraph("NIC: " + rs.getString("nic")));
-                document.add((Element) new Paragraph("Address: " + rs.getString("address")));
-                document.add((Element) new Paragraph("Contact: " + rs.getString("contact")));
-                document.add((Element) new Paragraph("Pickup: " + rs.getString("pickup_location")));
-                document.add((Element) new Paragraph("Drop: " + rs.getString("drop_location")));
-                document.add((Element) new Paragraph("Vehicle: " + rs.getString("vehicle_type")));
-                document.add((Element) new Paragraph("Distance: " + rs.getDouble("distance") + " km"));
-                document.add((Element) new Paragraph("Fare: Rs. " + rs.getDouble("fare")));
-                document.add((Element) new Paragraph("Date: " + rs.getString("booking_date")));
+                // Create a PDF document
+                Document document = new Document();
+                OutputStream out = response.getOutputStream();
+
+                response.setContentType("application/pdf");
+                response.setHeader("Content-Disposition", "attachment; filename=\"bill.pdf\"");
+
+                PdfWriter.getInstance(document, out);
+                document.open();
+
+                // Add bill details to the PDF
+                document.add(new Paragraph("Bill No: " + rs.getString("bill_no")));
+                document.add(new Paragraph("Customer Name: " + rs.getString("customer_name")));
+                document.add(new Paragraph("Customer NIC: " + rs.getString("customer_nic")));
+                document.add(new Paragraph("Customer Email: " + rs.getString("customer_email")));
+                document.add(new Paragraph("Pickup Location: " + rs.getString("pickup_location")));
+                document.add(new Paragraph("Drop Location: " + rs.getString("drop_location")));
+                document.add(new Paragraph("Vehicle Name: " + rs.getString("vehicle_name")));
+                document.add(new Paragraph("Fare: Rs. " + rs.getDouble("fare")));
+                document.add(new Paragraph("Date: " + rs.getString("bill_date")));
+
+                document.close();
+                out.close();
             }
 
-            document.close();
+            rs.close();
+            pst.close();
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    private static class Paragraph {
-
-        public Paragraph(String string) {
+            response.sendRedirect("viewMyBooking.jsp?error=1");
         }
     }
 }

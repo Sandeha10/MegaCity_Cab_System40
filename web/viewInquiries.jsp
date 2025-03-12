@@ -32,8 +32,8 @@
 
         <!-- Main Content -->
         <main class="dashboard-content">
-            <h1> Mega City Cab Service</h1>
-            <h2> All Inquiries</h2>
+            
+            <h2> <b>All Inquiries</b></h2>
             <div class="table-container">
                 <table class="table table-hover">
                     <thead class="table-dark">

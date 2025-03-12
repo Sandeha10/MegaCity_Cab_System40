@@ -49,9 +49,9 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="admin-info">
-                <h3><%= adminName %></h3>
+<!--                <h3><%= adminName %></h3>
                 <p><%= adminEmail %></p>
-                <p>? <%= adminContact %></p>
+                <p>? <%= adminContact %></p>-->
             </div>
             <nav>
                 <ul>
@@ -61,7 +61,7 @@
                     <li><a href="vehicleManagement.jsp"> Vehicle Management</a></li>
                     <li><a href="viewAllReviews.jsp"> View All Reviews </a></li>
                     <li><a href="viewInquiries.jsp"> View All Inquiries </a></li>
-                    <li><a href="admin-billing.jsp"> View All Inquiries </a></li>
+                    <li><a href="admin-billing.jsp"> Generate Bill </a></li>
                     
                     <button id="createAdminBtn" class="btn btn-gradient w-100 mt-2"> Create Admin</button>
                 </ul>
@@ -73,8 +73,13 @@
 
         <!-- Main Content -->
         <main class="dashboard-content">
-            <h1> Mega City Cab Service</h1>
-            <h2> Dashboard Overview</h2>
+            <h1 style="text-align:center;"> <b> Mega City Cab Service </b></h1>
+            <br><!-- comment -->
+            <br><!-- comment -->
+            <h2> Admin  Dashboard </h2>
+            <br><!-- comment -->
+            <br><!-- comment -->
+            
             <div class="card-container">
                 <div class="card">
                     <h3>Total Bookings</h3>
