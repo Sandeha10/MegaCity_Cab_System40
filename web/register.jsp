@@ -1,18 +1,35 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="jakarta.servlet.http.HttpSession" %> <!-- Corrected import -->
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Mega City Cab</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/register.css">
+    <script>
+        function validateForm() {
+            var name = document.forms["registerForm"]["name"].value;
+            var email = document.forms["registerForm"]["email"].value;
+            var contact = document.forms["registerForm"]["contact"].value;
+            var password = document.forms["registerForm"]["password"].value;
+
+            if (name == "" || email == "" || contact == "" || password == "") {
+                document.getElementById("errorMessage").innerHTML = "All fields are required";
+                return false;
+            }
+            return true;
+        }
+
+        function showSuccessMessage() {
+            alert("Registration successful!");
+        }
+    </script>
 </head>
 <body>
 
     <div class="container">
         <h2>Create Your Account</h2>
-        <!-- Check if there's an error message in the URL -->
         <%
             String errorMessage = request.getParameter("error");
             if (errorMessage != null && errorMessage.equals("1")) {
@@ -21,13 +38,14 @@
         <%
             }
         %>
-        <form action="RegisterServlet" method="post">
-            <input type="text" name="name" placeholder="Enter Name" required><br><br>
-            <input type="email" name="email" placeholder="Enter Email" required><br><br>
-            <input type="text" name="contact" placeholder="Enter Contact Number" required><br><br>
-            <input type="password" name="password" placeholder="Enter Password" required><br><br>
+        <form name="registerForm" action="RegisterServlet" method="post" onsubmit="return validateForm()">
+            <input type="text" name="name" placeholder="Enter Name"><br><br>
+            <input type="email" name="email" placeholder="Enter Email"><br><br>
+            <input type="text" name="contact" placeholder="Enter Contact Number"><br><br>
+            <input type="password" name="password" placeholder="Enter Password"><br><br>
             <button type="submit">Register</button>
         </form>
+        <p id="errorMessage" style="color: red;"></p>
         <p>Already have an account? <a href="login.jsp">Login here</a></p>
     </div>
 
@@ -41,7 +59,18 @@
                 response.sendRedirect("user/dashboard.jsp"); // Redirect to user dashboard if already logged in as user
             }
         }
+
+        // Check if registration was successful
+        String success = request.getParameter("success");
+        if (success != null && success.equals("1")) {
+    %>
+            <script>
+                showSuccessMessage();
+                window.location.href = "login.jsp"; // Redirect to login page after showing the success message
+            </script>
+    <%
+        }
     %>
 
 </body>
-</html> 
+</html>

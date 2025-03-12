@@ -20,9 +20,10 @@ body {
 
 h2 {
     margin-bottom: 20px;
+    color: #00796B; /* Matching the login page's heading color */
 }
 
-input[type="email"], input[type="password"] {
+input[type="text"], input[type="email"], input[type="password"] {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
@@ -65,9 +66,16 @@ a:hover {
     margin-top: 5px;
     display: block;
 }
-.error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-    display: block;
+
+/* Success Popup Style (Optional) */
+.success-popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    display: none; /* Hidden by default */
 }

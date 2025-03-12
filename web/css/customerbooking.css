@@ -5,8 +5,12 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    color: #fff;
+    color: #333; /* Dark text for light theme */
     animation: fadeBackground 10s infinite alternate ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
 }
 
 /* Background Image Fade Effect */
@@ -17,27 +21,26 @@ body {
 
 /* Centered Booking Form */
 .container {
-    max-width: 700px;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 40px;
+    max-width: 500px; /* Reduced width */
+    background: rgba(255, 255, 255, 0.9); /* Light background */
+    padding: 30px; /* Reduced padding */
     border-radius: 15px;
-    box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.2);
-    margin-top: 50px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
     transition: all 0.3s ease-in-out;
 }
 
 /* Hover Effect for Container */
 .container:hover {
     transform: scale(1.02);
-    box-shadow: 0px 15px 40px rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.2);
 }
 
 /* ----- Form Heading ----- */
 h2 {
     text-align: center;
-    font-size: 28px;
+    font-size: 24px; /* Slightly smaller heading */
     font-weight: 600;
-    color: #ffcc00;
+    color: #007bff; /* Blue heading */
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -49,18 +52,18 @@ h2 {
     font-size: 14px;
     display: block;
     margin-top: 10px;
-    color: #ffcc00;
+    color: #007bff; /* Blue labels */
 }
 
 /* ----- Input Fields & Select Box ----- */
 .booking-form input, .booking-form select {
     width: 100%;
-    padding: 12px;
+    padding: 10px; /* Slightly smaller padding */
     margin-top: 5px;
-    border: none;
+    border: 1px solid #ddd; /* Light border */
     border-radius: 5px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    background: rgba(255, 255, 255, 0.9); /* Light background */
+    color: #333; /* Dark text */
     font-size: 14px;
     outline: none;
     transition: all 0.3s ease-in-out;
@@ -68,14 +71,15 @@ h2 {
 
 /* Focus Effect */
 .booking-form input:focus, .booking-form select:focus {
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.5);
+    border-color: #007bff; /* Blue border on focus */
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.2); /* Soft blue shadow */
 }
 
 /* Dropdown Arrow Color */
 .booking-form select {
     appearance: none;
-    background-image: url('dropdown-arrow.png');
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23007bff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
     background-position: right 10px center;
     background-repeat: no-repeat;
     background-size: 15px;
@@ -84,7 +88,7 @@ h2 {
 /* ----- Error Messages (Validation) ----- */
 .text-danger {
     font-size: 12px;
-    color: red;
+    color: #dc3545; /* Red error text */
     font-weight: bold;
     display: none;
     margin-top: 5px;
@@ -93,9 +97,9 @@ h2 {
 /* ----- Submit Button ----- */
 .booking-form button {
     width: 100%;
-    background: linear-gradient(45deg, #ffcc00, #ff9900);
+    background: linear-gradient(45deg, #007bff, #0056b3); /* Blue gradient */
     color: white;
-    padding: 12px;
+    padding: 10px; /* Slightly smaller padding */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -107,8 +111,8 @@ h2 {
 
 /* Hover Effect for Button */
 .booking-form button:hover {
-    background: linear-gradient(45deg, #ff9900, #ffcc00);
-    box-shadow: 0px 5px 15px rgba(255, 204, 0, 0.6);
+    background: linear-gradient(45deg, #0056b3, #007bff);
+    box-shadow: 0px 5px 15px rgba(0, 123, 255, 0.4); /* Blue shadow */
     transform: translateY(-3px);
 }
 
@@ -116,11 +120,11 @@ h2 {
 @media (max-width: 768px) {
     .container {
         width: 90%;
-        padding: 30px;
+        padding: 20px; /* Reduced padding for mobile */
     }
     
     h2 {
-        font-size: 24px;
+        font-size: 22px; /* Smaller heading for mobile */
     }
     
     .booking-form input, .booking-form select {

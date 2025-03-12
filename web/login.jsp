@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="jakarta.servlet.http.HttpSession" %> 
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,14 +7,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Mega City Cab</title>
     <link rel="stylesheet" href="css/style.css">
+    <script>
+        // Function to validate email format
+        function validateEmail() {
+            const email = document.getElementById("email").value;
+            const emailError = document.getElementById("emailError");
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (email.trim() === "") {
+                emailError.textContent = "Email is required";
+                emailError.style.color = "red";
+                return false;
+            } else if (!emailRegex.test(email)) {
+                emailError.textContent = "Invalid email format";
+                emailError.style.color = "red";
+                return false;
+            } else {
+                emailError.textContent = "";
+                return true;
+            }
+        }
+
+        // Function to validate the form before submission
+        function validateForm() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const emailError = document.getElementById("emailError");
+            const passwordError = document.getElementById("passwordError");
+
+            // Reset error messages
+            emailError.textContent = "";
+            passwordError.textContent = "";
+
+            // Check if email is empty
+            if (email.trim() === "") {
+                emailError.textContent = "Email is required";
+                emailError.style.color = "red";
+                return false;
+            }
+
+            // Check if password is empty
+            if (password.trim() === "") {
+                passwordError.textContent = "Password is required";
+                passwordError.style.color = "red";
+                return false;
+            }
+
+            // Validate email format
+            if (!validateEmail()) {
+                return false;
+            }
+
+            return true;
+        }
+
+        // Function to show pop-up message for email/password mismatch
+        function showErrorPopup(message) {
+            alert(message);
+        }
+    </script>
 </head>
 <body>
 
     <div class="container">
         <h2>Login to Your Account</h2>
-        <form action="LoginServlet" method="post">
-            <input type="email" name="email" placeholder="Enter Email" required><br><br>
-            <input type="password" name="password" placeholder="Enter Password" required><br><br>
+        <form action="LoginServlet" method="post" onsubmit="return validateForm()">
+            <div>
+                <input type="email" id="email" name="email" placeholder="Enter Email" oninput="validateEmail()">
+                <span id="emailError" class="error-message"></span>
+            </div>
+            <br>
+            <div>
+                <input type="password" id="password" name="password" placeholder="Enter Password">
+                <span id="passwordError" class="error-message"></span>
+            </div>
+            <br>
             <button type="submit">Login</button>
         </form>
         <p>Don't have an account? <a href="register.jsp">Register here</a></p>
@@ -29,6 +96,16 @@
             } else {
                 response.sendRedirect("customer-dashboard.jsp");
             }
+        }
+
+        // Check for login error
+        String error = (String) request.getAttribute("error");
+        if (error != null) {
+    %>
+            <script>
+                showErrorPopup("<%= error %>");
+            </script>
+    <%
         }
     %>
 

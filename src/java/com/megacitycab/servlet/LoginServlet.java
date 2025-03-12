@@ -34,8 +34,8 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("customer-dashboard.jsp");
             }
         } else {
-            // If authentication fails, redirect back to login page
-            response.sendRedirect("login.jsp?error=Invalid credentials");
+            // If authentication fails, redirect back to login page with "Email/Password Mismatch" error
+            response.sendRedirect("login.jsp?error=Email/Password Mismatch");
         }
     }
 }

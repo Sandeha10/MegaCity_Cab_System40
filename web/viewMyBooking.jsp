@@ -62,6 +62,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Booking</title>
     <link rel="stylesheet" href="css/viewMyBooking.css">
+    
 </head>
 <body>
     <div class="container">
@@ -82,6 +83,32 @@
             <input type="hidden" name="customerEmail" value="<%= customerEmail %>">
             <button type="submit" class="btn-download">Download PDF</button>
         </form>
+
+        <!-- View My Bookings Button -->
+        <button id="viewBookingsBtn" class="btn-download">View My Bookings</button>
+
+        <!-- Modal for Bookings -->
+        <div id="bookingsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>My Bookings</h2>
+                <table class="bookings-table">
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Pickup Location</th>
+                            <th>Drop Location</th>
+                            <th>Vehicle Type</th>
+                            <th>Fare (Rs)</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTableBody">
+                        <!-- Bookings will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         <!-- Review and Rating Section -->
         <div class="review-section">
@@ -151,5 +178,54 @@
             </table>
         </div>
     </div>
+
+    <script>
+        // JavaScript to handle the modal
+        const modal = document.getElementById("bookingsModal");
+        const btn = document.getElementById("viewBookingsBtn");
+        const span = document.getElementsByClassName("close")[0];
+
+        // Open the modal when the button is clicked
+        btn.onclick = function() {
+            modal.style.display = "block";
+            fetchBookings();
+        };
+
+        // Close the modal when the close button is clicked
+        span.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        // Fetch bookings from the server
+        function fetchBookings() {
+            fetch("FetchBookingsServlet?customerEmail=<%= customerEmail %>")
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById("bookingsTableBody");
+                    tableBody.innerHTML = ""; // Clear existing rows
+
+                    data.forEach(booking => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${booking.booking_id}</td>
+                            <td>${booking.pickup_location}</td>
+                            <td>${booking.drop_location}</td>
+                            <td>${booking.vehicle_type}</td>
+                            <td>${booking.fare}</td>
+                            <td>${booking.booking_date}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error("Error fetching bookings:", error));
+        }
+    </script>
 </body>
 </html>

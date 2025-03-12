@@ -12,24 +12,26 @@ import java.util.List;
 
 public class UserDAO {
 
-    public static boolean registerUser(User user) {
-        String sql = "INSERT INTO user (name, email, contact, password_hash, role) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+  public static boolean registerUser(User user) {
+    String sql = "INSERT INTO user (name, email, contact, password_hash, role) VALUES (?, ?, ?, ?, ?)";
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, user.getName());
-            stmt.setString(2, user.getEmail());
-            stmt.setString(3, user.getContact());
-            stmt.setString(4, user.getPasswordHash());
-            stmt.setString(5, user.getRole());
+        stmt.setString(1, user.getName());
+        stmt.setString(2, user.getEmail());
+        stmt.setString(3, user.getContact());
+        stmt.setString(4, user.getPasswordHash());
+        stmt.setString(5, user.getRole());
 
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+        int rowsInserted = stmt.executeUpdate();
+        return rowsInserted > 0;
+
+    } catch (SQLException e) {
+        System.err.println("Error during user registration: " + e.getMessage());
+        e.printStackTrace();
+        return false;
     }
-
+}
     // Method to fetch user by email and password
     public User getUserByEmailAndPassword(String email, String password) {
         String sql = "SELECT * FROM user WHERE email = ?";

@@ -110,7 +110,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="carPassengers" class="form-label">Passenger Capacity</label>
-                        <input type="number" class="form-control" id="carPassengers" name="carPassengers" min="1" required>
+                        <input type="number" class="form-control" id="carPassengers" name="carPassengers" min="0" required>
                     </div>
                     <div class="mb-3">
                         <label for="carCharge" class="form-label">Charge per Km (Rs)</label>
@@ -152,7 +152,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="vanPassengers" class="form-label">Passenger Capacity</label>
-                        <input type="number" class="form-control" id="vanPassengers" name="vanPassengers" min="1" required>
+                        <input type="number" class="form-control" id="vanPassengers" name="vanPassengers" min="0" required>
                     </div>
                     <div class="mb-3">
                         <label for="vanCharge" class="form-label">Charge per Km (Rs)</label>
@@ -341,15 +341,15 @@
             const carPassengers = document.getElementById("carPassengers");
             const vanPassengers = document.getElementById("vanPassengers");
 
-            if (carPassengers && carPassengers.value <= 0) {
-                alert("Passenger Capacity must be greater than 0.");
-                return false;
-            }
-
-            if (vanPassengers && vanPassengers.value <= 0) {
-                alert("Passenger Capacity must be greater than 0.");
-                return false;
-            }
+//            if (carPassengers && carPassengers.value <= 0) {
+//                alert("Passenger Capacity must be greater than 0.");
+//                return false;
+//            }
+//
+//            if (vanPassengers && vanPassengers.value <= 0) {
+//                alert("Passenger Capacity must be greater than 0.");
+//                return false;
+//            }
 
             // Validate Charge per Km
             const carCharge = document.getElementById("carCharge");
